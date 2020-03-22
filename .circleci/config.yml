@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.13
-    working_directory: /go/src/github.com/fortytw2/meili
     steps:
       - checkout
       - run:
