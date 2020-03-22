@@ -71,8 +71,7 @@ func TestClientKeyHelpers(t *testing.T) {
 }
 
 func TestClientRouteHelper(t *testing.T) {
-
-	var cases = []struct {
+	cases := []struct {
 		Name    string
 		Address string
 		Route   string
