@@ -8,12 +8,10 @@ import "encoding/json"
 // use SynchronousWrite if you plan on doing that inline and just waiting for
 // the write operation to complete.
 func (c *Client) WriteOne(indexUID string, document json.RawMessage) (int, error) {
-
 	return 0, nil
 }
 
 func (c *Client) Write(indexUID string, documents []json.RawMessage) (int, error) {
-
 	return 0, nil
 }
 
