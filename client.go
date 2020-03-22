@@ -122,6 +122,8 @@ func NewClient(address string, opts ...ClientOption) (*Client, error) {
 	return c, nil
 }
 
+// WipeForTests is a convienient function to wipe every index in the connected Meili instance.
+// this can be very dangerous.
 func (c *Client) WipeForTests() error {
 	indexes, err := c.ListIndexes(context.TODO())
 	if err != nil {
