@@ -9,6 +9,12 @@ func (c *Client) makeRequest(r *http.Request) (*http.Response, error) {
 	return c.httpClient.Do(r)
 }
 
+func (c *Client) getRoute(route string) string {
+	newURL := c.addressURL
+	newURL.Path = route
+	return newURL.String()
+}
+
 func (c *Client) hasNoKeys() bool {
 	if c.allowNoKeys {
 		return false

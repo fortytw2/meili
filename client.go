@@ -1,8 +1,11 @@
 package meili
 
 import (
+	"context"
 	"errors"
+	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // ErrNoKeysProvided occurs when instantiating a meili client with
@@ -76,7 +79,8 @@ func WithHTTPClient(httpClient *http.Client) ClientOption {
 type Client struct {
 	httpClient *http.Client
 
-	address string
+	address    string
+	addressURL url.URL
 
 	allowNoKeys bool
 	masterKey   string
@@ -85,8 +89,14 @@ type Client struct {
 }
 
 func NewClient(address string, opts ...ClientOption) (*Client, error) {
+	addressURL, err := url.Parse(address)
+	if err != nil {
+		return nil, fmt.Errorf("meili: could not parse passed address %q: %w", address, err)
+	}
+
 	c := &Client{
-		address: address,
+		address:    address,
+		addressURL: *addressURL,
 	}
 
 	for _, opt := range DefaultClientOptions {
@@ -110,4 +120,21 @@ func NewClient(address string, opts ...ClientOption) (*Client, error) {
 	}
 
 	return c, nil
+}
+
+func (c *Client) WipeForTests() error {
+	indexes, err := c.ListIndexes(context.TODO())
+	if err != nil {
+		return err
+	}
+
+	for _, i := range indexes {
+		err = c.DeleteIndex(context.TODO(), i.UID)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	return nil
 }

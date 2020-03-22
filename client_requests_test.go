@@ -69,3 +69,38 @@ func TestClientKeyHelpers(t *testing.T) {
 		}
 	}
 }
+
+func TestClientRouteHelper(t *testing.T) {
+
+	var cases = []struct {
+		Name    string
+		Address string
+		Route   string
+		Expect  string
+	}{
+		{
+			"basic",
+			"http://127.0.0.1:7700",
+			"/indexes",
+			"http://127.0.0.1:7700/indexes",
+		},
+		{
+			"basic-2",
+			"http://127.0.0.1:7700/",
+			"/indexes",
+			"http://127.0.0.1:7700/indexes",
+		},
+	}
+
+	for _, c := range cases {
+		client, err := NewClient(c.Address, WithNoKeys())
+		if err != nil {
+			t.Errorf("could not instantiate client for case %q: %s", c.Name, err)
+		}
+
+		routeResult := client.getRoute(c.Route)
+		if routeResult != c.Expect {
+			t.Errorf("did not get expected route for case %q: got %q want %q", c.Name, routeResult, c.Expect)
+		}
+	}
+}
