@@ -3,4 +3,4 @@
 # go get mvdan.cc/gofumpt/gofumports
 
 # format all go files
-gofumports -w $(ls **/*.go | grep -v vendor)
+gofumports -w $(ls *.go | grep -v vendor)

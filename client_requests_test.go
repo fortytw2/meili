@@ -9,7 +9,7 @@ func TestClientKeyHelpers(t *testing.T) {
 		pubKey     = "public"
 	)
 
-	var cases = []struct {
+	cases := []struct {
 		Name      string
 		Options   []ClientOption
 		Get       func(c *Client) func() (string, error)

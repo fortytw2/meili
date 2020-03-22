@@ -3,8 +3,7 @@ package meili
 import "testing"
 
 func TestClientInitialization(t *testing.T) {
-
-	var cases = []struct {
+	cases := []struct {
 		Name      string
 		Options   []ClientOption
 		ShouldErr bool

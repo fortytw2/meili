@@ -23,6 +23,5 @@ func WithAttributesToHighlight(attrs []string) SearchOption {
 
 // Search is a simple API into meili search
 func (c *Client) Search(ctx context.Context, query string, destination interface{}, searchOptions ...SearchOption) error {
-
 	return nil
 }

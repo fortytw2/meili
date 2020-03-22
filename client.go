@@ -5,11 +5,9 @@ import (
 	"net/http"
 )
 
-var (
-	// ErrNoKeysProvided occurs when instantiating a meili client with
-	// no access keys set and keys not disabled
-	ErrNoKeysProvided = errors.New("meili: no key provided and WithNoKeys not set")
-)
+// ErrNoKeysProvided occurs when instantiating a meili client with
+// no access keys set and keys not disabled
+var ErrNoKeysProvided = errors.New("meili: no key provided and WithNoKeys not set")
 
 // a ClientOption is used to configure the client with less-standard options
 type ClientOption func(c *Client) error
