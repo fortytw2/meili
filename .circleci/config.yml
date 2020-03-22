@@ -1,0 +1,20 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.13
+    working_directory: /go/src/github.com/fortytw2/meili
+    steps:
+      - checkout
+      - run:
+          name: "Install lint and format tools"
+          command: |
+            go get mvdan.cc/gofumpt/gofumports
+            go get -u golang.org/x/lint/golint
+            go get honnef.co/go/tools/...
+      - run:
+          name: format
+          command: ./build/fmt && git diff --exit-code
+      - run:
+          name: lint
+          command: ./build/lint

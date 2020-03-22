@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# go get -u golang.org/x/lint/golint
+# go get honnef.co/go/tools/...
+
+# lint
+staticcheck $(go list -v ./... | grep -v node_modules)
+golint ./...
