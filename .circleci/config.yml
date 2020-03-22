@@ -8,9 +8,9 @@ jobs:
       - run:
           name: "Install lint and format tools"
           command: |
-            go get mvdan.cc/gofumpt/gofumports
-            go get -u golang.org/x/lint/golint
-            go get honnef.co/go/tools/...
+            GO111MODULE=off go get mvdan.cc/gofumpt/gofumports
+            GO111MODULE=off go get -u golang.org/x/lint/golint
+            GO111MODULE=off go get honnef.co/go/tools/...
       - run:
           name: format
           command: ./build/fmt && git diff --exit-code
