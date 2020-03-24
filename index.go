@@ -26,10 +26,18 @@ func (c *Client) CreateIndex(ctx context.Context, name, uid string, is *IndexSet
 		return err
 	}
 
-	body, err := json.Marshal(map[string]interface{}{
+	data := map[string]interface{}{
 		"uid":  uid,
 		"name": name,
-	})
+	}
+
+	if is != nil {
+		if is.PrimaryKey != "" {
+			data["primaryKey"] = is.PrimaryKey
+		}
+	}
+
+	body, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
